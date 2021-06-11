@@ -1,0 +1,12 @@
+{
+    "it" : {
+        "CookieConsentDescriptionString" : "Questo sito utilizza Cookies per analitica e per migliorare l'user experience",
+        "CookieAcceptButton" : "Ho capito ed accetto",
+        "CookieLearnMore" : "Maggiori informazioni"
+    },
+    "en" : {
+        "CookieConsentDescriptionString" : "This website uses Cookies for analytics and to enhance the user experience",
+        "CookieAcceptButton" : "I understand and accept",
+        "CookieLearnMore" : "Learn More"
+    }
+}
