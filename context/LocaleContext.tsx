@@ -1,9 +1,10 @@
 import React, { useState, createContext, useEffect, SetStateAction } from "react"
 import { FunctionComponent } from "react"
+import { CountryCodes } from '../constants/CountryCodes'
 import translations from '../files/translations.json'
 
 interface LocaleContextInterface {
-    contextCountry : string,
+    contextCountry : CountryCodes,
     setContextCountry : any,
     userCountry : any,
     setUserCountry : any,
@@ -12,11 +13,11 @@ interface LocaleContextInterface {
 
 
 // @ts-ignore
-export const translate = (countryCode : string, key : string) => translations[countryCode][key]
+export const translate = (countryCode : CountryCodes, key : string) => translations[countryCode][key]
 
 // Create Context Object
 export const LocaleContext = createContext<LocaleContextInterface>({
-    contextCountry : 'it',
+    contextCountry : CountryCodes.Italy,
     setContextCountry : {},
     userCountry : undefined,
     setUserCountry : undefined,
@@ -26,13 +27,13 @@ export const LocaleContext = createContext<LocaleContextInterface>({
 // Create a provider for components to consume and subscribe to changes
 export const LocaleContextProvider : FunctionComponent = ( props : any) => {
 
-    const [country, setCountry] = useState('it')
+    const [country, setCountry] = useState(CountryCodes.Italy)
     const [_userCountry, set_userCountry] = useState('')
     
-    const t = (key : string) => translate(country, key)
+    const t = (key : CountryCodes) => translate(country, key)
 
-    const setContextCountry = (countryCode :string) => setCountry(countryCode)
-    const setUserCountry = (countryCode : string) => set_userCountry(countryCode)
+    const setContextCountry = (countryCode :CountryCodes) => setCountry(countryCode)
+    const setUserCountry = (countryCode : CountryCodes) => set_userCountry(countryCode)
 
     return(
         <LocaleContext.Provider value={{

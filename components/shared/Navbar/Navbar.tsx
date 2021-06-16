@@ -1,33 +1,26 @@
-import React, { FunctionComponent, useContext } from 'react'
+import React, { Fragment, FunctionComponent, useContext } from 'react'
 import styled from 'styled-components'
-import { appGreen, appRed, appRedDisabled, darkBg, appGreenDisabled, appYellowDisabled, appYellow, appBlue, appBlueDisabled } from './../../theme/styled-components';
-import { LocaleContext } from './../../context/LocaleContext';
-import Link from 'next/link'
-import HomeIcon from './../icons/HomeIcon';
-import VideoIcon from '../icons/VideoIcon'
-import FreeIcon from '../icons/FreeIcon'
-import SlotBarIcon from '../icons/SlotBarIcon'
-import SlotVlt from '../icons/SlotVlt'
-import MoneyIcon from '../icons/MoneyIcon'
-import PyramidIcon from '../icons/PyramidIcon'
-import LampIcon from '../icons/LampIcon'
-import BlogIcon from '../icons/BlogIcon'
+import { appGreen, appRed, appRedDisabled, darkBg, appGreenDisabled, appYellowDisabled, appYellow, appBlue, appBlueDisabled } from '../../../theme/styled-components';
+import { LocaleContext } from '../../../context/LocaleContext';
+import HomeIcon from '../../icons/HomeIcon';
+import VideoIcon from '../../icons/VideoIcon'
+import FreeIcon from '../../icons/FreeIcon'
+import SlotBarIcon from '../../icons/SlotBarIcon'
+import SlotVlt from '../../icons/SlotVlt'
+import MoneyIcon from '../../icons/MoneyIcon'
+import PyramidIcon from '../../icons/PyramidIcon'
+import LampIcon from '../../icons/LampIcon'
+import BlogIcon from '../../icons/BlogIcon'
 import { useState } from 'react';
-import { OnlyMobile, tablet } from '../../utils/Breakpoints'
-import Divider from './Divider'
+import { OnlyMobile, tablet } from '../../../utils/Breakpoints'
 import Hamburger from 'hamburger-react'
 import Image from 'next/image'
+import NavBarItem, { INavbarItem } from './NavBarItem';
 
 interface Props {
     
 }
 
-interface NavbarItem {
-    text : string
-    link : string
-    icon? : JSX.Element
-    extra? : any
-}
 
 const Navbar : FunctionComponent<Props> = () => {
 
@@ -35,6 +28,7 @@ const Navbar : FunctionComponent<Props> = () => {
 
     const [open, setOpen] = useState(false)
 
+    
     const countryToNavbarItems = () => {
         switch(contextCountry){
             default :
@@ -42,65 +36,70 @@ const Navbar : FunctionComponent<Props> = () => {
         }
     }
 
-    const renderNavbarItem = (item : NavbarItem, last : boolean) => {
-        return <div style={{marginTop : last ? 'auto' : '0px', minHeight : '80px', cursor : 'pointer'}} key={item.text}>
-            <Link href={item.link}>
-                <div style={{ padding : '1rem'}}>
-                    {item.icon}
-                    <div className='navbar-item'>
-                        {item.text}
-                        {!last && <Divider style={{marginTop : '1rem'}}/>}
-                    </div> 
-                </div>
-            </Link>
-        </div>       
-    }
-   
+    const renderNavbarItem = (item : INavbarItem, last : boolean) => <NavBarItem key={item.text} open={open} last={last} {...item}/>
+       
     return (
-        <div>
-            
-
-            <Container open={open} onMouseOver={() => !open && setOpen(true)} onMouseLeave={() => open && setOpen(false)}>
-                <nav className='navbar'>
+        <Fragment>
+            <IconsTransitionProvider open={open} onMouseOver={() => !open && setOpen(true)} onMouseLeave={() => open && setOpen(false)}>
+                <DesktopNavbar open={open}>
                     {countryToNavbarItems()}
-                </nav>
-            </Container>
+                </DesktopNavbar>
+            </IconsTransitionProvider>
 
             <OnlyMobile>
-                <nav style={{
-                    height : '66px', 
-                    background : darkBg, 
-                    display : 'flex', 
-                    justifyContent : 'space-between',
-                    alignItems : 'center',
-                    padding : '0rem .5rem'
-                }}>
+                <MobileNavbar>
                     <Image width='36px' height='36px' src='/icons/search-icon-white.svg' />
                     <Hamburger direction="left" color='#fff' hideOutline={true} onToggle={toggled => {setOpen(!open)}}/>
-                </nav>
+                </MobileNavbar>
             </OnlyMobile>
-        </div>
+        </Fragment>
     )
 }
 
 const iconTransitionTime = '1s'
 
+const DesktopNavbar = styled.nav`
+    display : ${(props : { open : boolean }) => props.open ? 'flex' : 'none'};
+    position : fixed;
+    overflow-y : scroll;
+    overflow-x : hidden;
+    white-space : nowrap; 
+    z-index : 10;
 
-interface ContainerProps {
-    open : boolean
-}
+    flex-direction : column;
 
-const Container = styled.div`
-    
-    .navbar-item{
-        display : none;
-        width : 100%;
-        opacity : 0;
-        vertical-align : middle;
-        margin-top : .5rem;
-        transition : opacity ease .4s;
+    width : 75vw;
+    height : 100vh;
+
+    background : ${darkBg};
+    transition : width, ease, .3s;
+
+
+    ${tablet}{
+        display : flex;
+        overflow-y : hidden;
+
+        width : ${(props : { open : boolean }) => props.open ? '18rem' : '5rem'};
+
+        background : ${darkBg};
+
+        padding-right : ${(props : { open : boolean }) => props.open ? '7rem' : '0rem'};
     }
+`
 
+const MobileNavbar = styled.nav`
+    display : flex;
+    justify-content : space-between;
+    align-items : center;
+
+    height : 66px;
+    padding : 0rem .5rem;
+
+    background : ${darkBg};
+`
+
+const IconsTransitionProvider = styled.div`
+    
     .home-icon{
         height : 46px;
         fill : ${appRedDisabled};
@@ -164,38 +163,7 @@ const Container = styled.div`
         vertical-align : middle;
     }
 
-    .navbar{
-        display : ${(props : ContainerProps) => props.open ? 'flex' : 'none'};
-        flex-direction : column;
-        width : 75vw;
-        height : 100vh;
-        overflow-y : scroll;
-        overflow-x : hidden;
-        position : fixed;
-        background : ${darkBg};
-        transition : width, ease, .3s;
-        white-space : nowrap; 
-        z-index : 10;
-
-
-        ${tablet}{
-            display : flex;
-            width : ${(props : ContainerProps) => props.open ? '18rem' : '5rem'};
-            background : ${darkBg};
-            overflow-y : hidden;
-            padding-right : ${(props : ContainerProps) => props.open ? '7rem' : '0rem'};;
-        }
-    }
-
-    ${(props : ContainerProps) => props.open && `
-        .navbar-item{
-            display : inline-block;
-            color : white;
-            cursor: pointer;
-            margin-left : 1rem;
-            opacity : 1;
-        }
-
+    ${(props : { open : boolean }) => props.open && `
         .home-icon{
             fill: ${appRed};
         }
@@ -234,7 +202,7 @@ const Container = styled.div`
     `}
 `
 
-const ItalianNavBarItems : NavbarItem[] = [
+const ItalianNavBarItems : INavbarItem[] = [
     {
         text : 'Video',
         link : '/videos/it',

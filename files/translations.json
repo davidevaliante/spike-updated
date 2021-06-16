@@ -1,10 +1,14 @@
 {
     "it" : {
+        "BaseTitleMetaTag" : "SPIKE Slot | Il Blog n.1 in Italia su Slot Machines e Gioco D'azzardo",
+        "BaseDescription" : "Il Miglior sito per Casino Online Sicuri AAMS ✅ Bonus Slot Machine con deposito e senza deposito. Trovi le migliori Slot Machine su cui giocare ed i trucchi e consigli di SPIKE",
         "CookieConsentDescriptionString" : "Questo sito utilizza Cookies per analitica e per migliorare l'user experience",
         "CookieAcceptButton" : "Ho capito ed accetto",
         "CookieLearnMore" : "Maggiori informazioni"
     },
     "en" : {
+        "BaseTitleMetaTag" : "SPIKE Slot | The n.1 website on about Slot Machines and gambling",
+        "BaseDescription" : "The best website for Online Casinos ✅ Bonus Slot Machine with and without deposit. You can find the best slot machines suggested by SPIKE",
         "CookieConsentDescriptionString" : "This website uses Cookies for analytics and to enhance the user experience",
         "CookieAcceptButton" : "I understand and accept",
         "CookieLearnMore" : "Learn More"

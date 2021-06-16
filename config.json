@@ -1,7 +1,11 @@
 {
+    "canonicaUrlRoot" : "https://www.spikeslot.com",
     "baseCountry" : "it",
     "supportedCountries" : [
         "ca",
         "en"
-    ]
+    ],
+    "googleSiteVerificationYoutube" : "UmP-j4RgASnaCO-_OIXFoGoNb1M9xd8a22uMn4T2JiI",
+    "baseCoverImage" : "https://spikewebsitemedia.b-cdn.net/spike_share_img.jpg",
+    "hello" : "world"
 }

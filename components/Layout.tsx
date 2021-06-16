@@ -5,7 +5,8 @@ import { LocaleContext } from '../context/LocaleContext'
 import { appBlue, appYellow } from '../theme/styled-components'
 import styled from 'styled-components'
 import Link from 'next/link'
-import Navbar from './shared/Navbar'
+import Navbar from './shared/Navbar/Navbar'
+import { laptop } from './../utils/Breakpoints';
 
 interface Props {
     
@@ -43,7 +44,13 @@ const Layout : FunctionComponent<Props> = ({children}) => {
 }
 
 const PageLayout = styled.div`
-    margin-left : 5rem;
+
+    padding : 1.2rem;
+
+    ${laptop}{
+        margin-left : 5rem;
+        padding : 3rem;
+    }
 `
 
 export default Layout
