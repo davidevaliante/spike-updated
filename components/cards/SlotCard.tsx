@@ -1,5 +1,5 @@
 import React, { Fragment, FunctionComponent } from 'react'
-import { ApolloSlotCard } from './../../data/graphql/schema'
+import { ApolloSlotCard } from '../../data/graphql/schema'
 import styled from 'styled-components'
 import Image from 'next/image'
 

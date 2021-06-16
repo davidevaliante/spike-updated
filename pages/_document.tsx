@@ -1,5 +1,6 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
+import config from '../config.json'
 
 export default class MyDocument extends Document {
 	static async getInitialProps(ctx : any) {
@@ -34,7 +35,7 @@ export default class MyDocument extends Document {
 		  <Html>
 			<Head>
 				<link
-					href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
+					href={config.fontLink}
 					rel="stylesheet"
 				/>
 			</Head>

@@ -15,8 +15,9 @@ import MarkdownRenderer from './../components/shared/Markdown/MarkdownRenderer';
 import Divider from '../components/shared/Divider'
 import { darkBg } from './../theme/styled-components';
 import VerticalSpacer from './../components/shared/VerticalSpacer';
-import SlotCard from '../components/SlotCard/SlotCard'
+import SlotCard from '../components/cards/SlotCard'
 import SlotList from '../components/Lists/SlotList'
+import Carousel from '../components/carousel/Carousel'
 
 
 interface Props {
@@ -57,7 +58,8 @@ const index : FunctionComponent<Props> = ({
 			<MetaTags title={t('BaseTitleMetaTag')} description={t('BaseDescription')} canonicalUrl={router.asPath} />
 
 			<Layout>
-				<MarkdownRenderer content={topArticle}/>
+				<Carousel />
+				{/* <MarkdownRenderer content={topArticle}/>
 
 				<SlotList listHeader={t('Best Online Slots')} scrollbarColor='#ebba34'>
 					{onlineSlots.map(s => <SlotCard key={s.id} slot={s}/>)}
@@ -79,7 +81,7 @@ const index : FunctionComponent<Props> = ({
 
 				<VerticalSpacer />
 
-				<MarkdownRenderer content={bottomArticle}/>
+				<MarkdownRenderer content={bottomArticle}/> */}
 			</Layout>
 		</Fragment>
 	)

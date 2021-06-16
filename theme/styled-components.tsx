@@ -1,12 +1,17 @@
-import React, { FunctionComponent } from 'react'
-import styled, { createGlobalStyle } from 'styled-components'
-
-interface Props {
-    
-}
+import { createGlobalStyle } from 'styled-components'
+import config from '../config.json'
 
 
-export const appRed = '#ef476f'
+
+export const appRed = '#CF2029'
+export const appGrey = '#8e8ea9'
+
+export const appGold = '#db6e0b'
+
+export const accentColor = '#CF2029'
+export const primary = '#27273f'
+export const primaryDark = '#212335'
+
 export const appRedDisabled = '#b35068'
 
 export const appYellow = '#ffd166'
@@ -22,7 +27,8 @@ export const darkBg = '#404040'
 
 const GlobalStyle = createGlobalStyle`
     body{
-        font-family: 'Inter', sans-serif;
+        font-family: ${config.fontName}, sans-serif;
+        background : ${primary};
     }
 
     a{

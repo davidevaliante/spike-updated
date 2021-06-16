@@ -2,20 +2,14 @@ import React, { Fragment, FunctionComponent, useContext } from 'react'
 import styled from 'styled-components'
 import { appGreen, appRed, appRedDisabled, darkBg, appGreenDisabled, appYellowDisabled, appYellow, appBlue, appBlueDisabled } from '../../../theme/styled-components';
 import { LocaleContext } from '../../../context/LocaleContext';
-import HomeIcon from '../../icons/HomeIcon';
-import VideoIcon from '../../icons/VideoIcon'
-import FreeIcon from '../../icons/FreeIcon'
-import SlotBarIcon from '../../icons/SlotBarIcon'
-import SlotVlt from '../../icons/SlotVlt'
-import MoneyIcon from '../../icons/MoneyIcon'
-import PyramidIcon from '../../icons/PyramidIcon'
-import LampIcon from '../../icons/LampIcon'
-import BlogIcon from '../../icons/BlogIcon'
 import { useState } from 'react';
 import { OnlyMobile, tablet } from '../../../utils/Breakpoints'
 import Hamburger from 'hamburger-react'
 import Image from 'next/image'
-import NavBarItem, { INavbarItem } from './NavBarItem';
+import NavBarItem, { INavbarItem, ItalianNavBarItems } from './NavBarItem';
+import SpikeLogo from './../SpikeLogo';
+import Row from './../../general/Row';
+import { primaryDark } from './../../../theme/styled-components';
 
 interface Props {
     
@@ -25,7 +19,6 @@ interface Props {
 const Navbar : FunctionComponent<Props> = () => {
 
     const {t, contextCountry} = useContext(LocaleContext)
-
     const [open, setOpen] = useState(false)
 
     
@@ -36,15 +29,22 @@ const Navbar : FunctionComponent<Props> = () => {
         }
     }
 
-    const renderNavbarItem = (item : INavbarItem, last : boolean) => <NavBarItem key={item.text} open={open} last={last} {...item}/>
-       
+    const renderNavbarItem = (item : INavbarItem, last : boolean) => <NavBarItem key={item.text} open={open} {...item}/>
+      
     return (
         <Fragment>
-            <IconsTransitionProvider open={open} onMouseOver={() => !open && setOpen(true)} onMouseLeave={() => open && setOpen(false)}>
+            {/* <IconsTransitionProvider open={open} onMouseOver={() => !open && setOpen(true)} onMouseLeave={() => open && setOpen(false)}>
                 <DesktopNavbar open={open}>
                     {countryToNavbarItems()}
                 </DesktopNavbar>
-            </IconsTransitionProvider>
+            </IconsTransitionProvider> */}
+
+            <HorizontalDesktopNavbar>
+                <SpikeLogo />
+                <Row>
+                    {countryToNavbarItems()}
+                </Row>
+            </HorizontalDesktopNavbar>
 
             <OnlyMobile>
                 <MobileNavbar>
@@ -57,6 +57,21 @@ const Navbar : FunctionComponent<Props> = () => {
 }
 
 const iconTransitionTime = '1s'
+
+const HorizontalDesktopNavbar = styled.div`
+    display : none;
+
+    ${tablet}{
+        display : flex;
+        justify-content : center;
+        align-items : center;
+        justify-content : flex-start;
+
+        div:last-child{
+            margin-left : auto;
+        }
+    }
+`
 
 const DesktopNavbar = styled.nav`
     display : ${(props : { open : boolean }) => props.open ? 'flex' : 'none'};
@@ -81,7 +96,7 @@ const DesktopNavbar = styled.nav`
 
         width : ${(props : { open : boolean }) => props.open ? '18rem' : '5rem'};
 
-        background : ${darkBg};
+        background : ${primaryDark};
 
         padding-right : ${(props : { open : boolean }) => props.open ? '7rem' : '0rem'};
     }
@@ -95,7 +110,7 @@ const MobileNavbar = styled.nav`
     height : 66px;
     padding : 0rem .5rem;
 
-    background : ${darkBg};
+    background : ${primaryDark};
 `
 
 const IconsTransitionProvider = styled.div`
@@ -202,52 +217,6 @@ const IconsTransitionProvider = styled.div`
     `}
 `
 
-const ItalianNavBarItems : INavbarItem[] = [
-    {
-        text : 'Video',
-        link : '/videos/it',
-        icon : <VideoIcon />
-    },
-    {
-        text : 'Giochi Gratuiti',
-        link : '/slots/it',
-        icon : <FreeIcon />
-    },
-    {
-        text : 'Slot da Bar',
-        link : '/slot-bar/it',
-        icon : <SlotBarIcon />
-    },
-    {
-        text : 'Slot VLT',
-        link : '/slot-vlt/it',
-        icon : <SlotVlt/>
-    },
-    {
-        text : 'Bonus di benvenuto',
-        link : '/migliori-bonus-casino',
-        icon : <MoneyIcon />
-    },
-    {
-        text : 'Book of Ra Online',
-        link : '/slot/book-of-ra-deluxe/it',
-        icon : <PyramidIcon />
-    },
-    {
-        text : 'Guide e trucchi',
-        link : '/guide-e-trucchi/it',
-        icon : <LampIcon />
-    },
-    {
-        text : 'Blog e articoli',
-        link : '/blog/it',
-        icon : <BlogIcon />
-    },
-    {
-        text : 'Home',
-        link : '/',
-        icon : <HomeIcon />
-    },
-]
+
 
 export default Navbar

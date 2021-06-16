@@ -7,6 +7,7 @@ import styled from 'styled-components'
 import Link from 'next/link'
 import Navbar from './shared/Navbar/Navbar'
 import { laptop } from './../utils/Breakpoints';
+import { useState } from 'react';
 
 interface Props {
     
@@ -19,9 +20,9 @@ const Layout : FunctionComponent<Props> = ({children}) => {
     return (
         <Fragment>
 
-            <Navbar />
 
             <PageLayout>
+                <Navbar />
                 {children}
             </PageLayout>
 
@@ -44,11 +45,12 @@ const Layout : FunctionComponent<Props> = ({children}) => {
 }
 
 const PageLayout = styled.div`
-
-    padding : 1.2rem;
+    max-width : 1400px;
+    min-height : 100vh;
+    margin : auto;
+    box-sizing: border-box;
 
     ${laptop}{
-        margin-left : 5rem;
         padding : 3rem;
     }
 `

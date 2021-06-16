@@ -1,5 +1,7 @@
 {
     "canonicaUrlRoot" : "https://www.spikeslot.com",
+    "fontName" : "Montserrat",
+    "fontLink" : "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap",
     "baseCountry" : "it",
     "supportedCountries" : [
         "ca",

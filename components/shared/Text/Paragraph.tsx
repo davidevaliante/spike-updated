@@ -14,6 +14,7 @@ const Paragraph : FunctionComponent<Props> = ({style, children}) => {
 
 const AppParagraph = styled.p`
     line-height : 1.5rem;
+    color: white;
 `
 
 export default Paragraph

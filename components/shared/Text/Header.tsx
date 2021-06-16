@@ -11,7 +11,7 @@ interface Props {
 const Header : FunctionComponent<Props> = ({
     children, 
     type, 
-    color = appRed, 
+    color = 'white', 
     style
 }) => {
     switch(type){
@@ -34,6 +34,8 @@ const AppHeader1 = styled.h1`
     /* font-weight : bold; */
     font-size : 2em;
     margin : 1rem 0rem;
+    font-weight : 700;
+    font-size : 3rem;
 `
 
 const AppHeader2 = styled.h2`
