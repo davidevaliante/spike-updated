@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react'
 import Markdown from 'markdown-to-jsx';
 import Paragraph from './../Text/Paragraph';
-import Header from './../Text/HeaderOne';
+import Header from '../Text/Header';
 import AnchorText from './../Text/AnchorText';
 
 interface Props {

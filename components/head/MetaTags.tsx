@@ -4,6 +4,7 @@ import { appRed } from '../../theme/styled-components'
 import config from '../../config.json'
 import { LocaleContext } from '../../context/LocaleContext'
 import { countryCodeToContentLanguage } from './../../utils/multilanguage';
+import Head from 'next/head'
 
 interface Props {
     title : string,
@@ -24,9 +25,11 @@ const MetaTags : FunctionComponent<Props> = ({
 }) => {
 
     const { contextCountry } = useContext(LocaleContext)
+    console.log('called')
+    console.log(title, 'title')
 
     return (
-        <Fragment>
+        <Head>
             <title>{title}</title>
             <meta httpEquiv="content-language" content={countryCodeToContentLanguage(contextCountry)}></meta>
             <meta charSet="utf-8" />
@@ -60,7 +63,7 @@ const MetaTags : FunctionComponent<Props> = ({
             <meta name="theme-color" content={appRed} />
             <meta name="trustpilot-one-time-domain-verification-id" content="cf1b3477-d2d7-4301-8bb2-ac990e9d75de"/>
             <meta name='dmca-site-verification' content='Zm11U3BIcnlVMlNEcUo4SjVESEsrSS9FcUVwb0RzNVV2M3NwSDM1eFdNVT01' />
-        </Fragment>
+        </Head>
     )
 }
 

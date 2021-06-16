@@ -15,6 +15,8 @@ import MarkdownRenderer from './../components/shared/Markdown/MarkdownRenderer';
 import Divider from '../components/shared/Divider'
 import { darkBg } from './../theme/styled-components';
 import VerticalSpacer from './../components/shared/VerticalSpacer';
+import SlotCard from '../components/SlotCard/SlotCard'
+import SlotList from '../components/Lists/SlotList'
 
 
 interface Props {
@@ -44,29 +46,36 @@ const index : FunctionComponent<Props> = ({
 	const {t} = useContext(LocaleContext)
 	const router = useRouter()
 
-	console.log(seo,
-		topArticle,
-		bottomArticle,
-		country,
-		bonuses,
+	console.log(
 		onlineSlots,
 		vltSlots,
 		barSlots, 
 		producerSlots)
 
-
-
 	return (
 		<Fragment>
-			<Head>
-				<MetaTags title={t('BaseTitleMetaTag')} description={t('BaseDescription')} canonicalUrl={router.asPath} />
-			</Head>
+			<MetaTags title={t('BaseTitleMetaTag')} description={t('BaseDescription')} canonicalUrl={router.asPath} />
+
 			<Layout>
 				<MarkdownRenderer content={topArticle}/>
 
-				<VerticalSpacer />
+				<SlotList listHeader={t('Best Online Slots')} scrollbarColor='#ebba34'>
+					{onlineSlots.map(s => <SlotCard key={s.id} slot={s}/>)}
+				</SlotList>
 
-				<Divider thickness={2} color={darkBg}/>
+				<SlotList listHeader={t('Best Online Slots')} scrollbarColor='#ebba34'>
+					{producerSlots.map(s => <SlotCard key={s.id} slot={s}/>)}
+				</SlotList>
+
+				<SlotList listHeader={t('Best Online Slots')} scrollbarColor='#ebba34'>
+					{vltSlots.map(s => <SlotCard key={s.id} slot={s}/>)}
+				</SlotList>
+
+				<SlotList listHeader={t('Best Online Slots')} scrollbarColor='#ebba34'>
+					{barSlots.map(s => <SlotCard key={s.id} slot={s}/>)}
+				</SlotList>
+
+				<VerticalSpacer />
 
 				<VerticalSpacer />
 
@@ -87,10 +96,10 @@ export const getStaticProps: GetStaticProps = async (context : GetStaticPropsCon
 			bottomArticle,
 			country : 'it',
 			bonuses : bonuses.bonus,
-			onlineSlots : onlineSlots.slot,
-			vltSlots : vltSlots.slot,
-			barSlots : barSlots.slot, 
-			producerSlots : producerSlots.slot
+			onlineSlots : onlineSlots.slot.map(s => s.slot),
+			vltSlots : vltSlots.slot.map(s => s.slot),
+			barSlots : barSlots.slot.map(s => s.slot), 
+			producerSlots : producerSlots.slot.map(s => s.slot)
 		}
 	}
 }
