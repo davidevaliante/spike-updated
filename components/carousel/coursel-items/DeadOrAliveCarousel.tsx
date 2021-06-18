@@ -14,7 +14,7 @@ interface Props {
     
 }
 
-const gonzoImageUrl = '/pics/gonzo-slot-2-min.jpg'
+const gonzoImageUrl = '/pics/dead-or-alive-carousel.jpg'
 
 const GonzoCarouselItem : FunctionComponent<Props> = ({}) => {
     return (
@@ -35,7 +35,6 @@ const GonzoCarouselItem : FunctionComponent<Props> = ({}) => {
                 <CarouselDimmer />
             </GonzoStyleProvider>
         </FadeInFadeOutContainer>
-        
     )
 }
 

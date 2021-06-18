@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react'
+import React, { FunctionComponent, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { accentColor, appGrey, primary } from '../../theme/styled-components'
 import Image from 'next/image'
@@ -10,6 +10,10 @@ import { appYellow, appGold } from './../../theme/styled-components';
 import { tablet } from '../../utils/Breakpoints'
 import { laptop } from './../../utils/Breakpoints';
 import GonzoCarouselItem from './coursel-items/GonzoCarouselItem'
+import DeadOrAliveCarousel from './coursel-items/DeadOrAliveCarousel'
+import { useEffect } from 'react';
+import useInterval from './../../hooks/useInterval';
+import BookOfOzCarousel from './coursel-items/BookOfOzCarousel'
 
 
 
@@ -20,23 +24,73 @@ interface Props {
 
 export const carouselDesktopSize = {width : '100%', height : '700px'}
 
+const autoCycling = true
+
 const Carousel : FunctionComponent<Props> = ({}) => {
 
-    const [dimmed, setDimmed] = useState(false)
-    
-    const dimContent = () => setDimmed(true)
+    const carouselCards = [<GonzoCarouselItem/>, <DeadOrAliveCarousel />, <BookOfOzCarousel />]
 
-    const undimContent = () => setDimmed(false)
+    const [activeElement, setActiveElement] = useState(0)
+    const [timerId, setTimerId] = useState<NodeJS.Timeout[]>([])
+    const [isHovering, setIsHovering] = useState(false)
+
+
+    useEffect(() => {
+        if(timerId.length == 0) {
+            if(!isHovering && timerId.length == 0) scheduleCycle()
+            if(isHovering && timerId.length > 0) clearAllScheduledIntervals()
+        }
+    }, [timerId, isHovering])
+    
+    const scheduleCycle = () => {
+        console.log('scheduling new cycle')
+        const newIntervalId = setTimeout(() => {
+            goForwards()
+            clearInterval(newIntervalId)
+            setTimerId([])
+        }, 5000)
+
+        setTimerId([newIntervalId])
+    }
+
+    const clearAllScheduledIntervals = () => {
+        console.log('clearing');
+        
+        timerId.forEach(id => clearInterval(id))
+    }
+
+
+    const goForwards = () => {
+        // console.log('going forwards', activeElement)
+        if(activeElement + 1 <= carouselCards.length-1) setActiveElement(a => activeElement + 1)
+        else setActiveElement(0)
+
+        // if(autoCycling) {
+        //     clearAllScheduledIntervals()
+        //     scheduleCycle()
+        // }
+    }
+
+    const goBackwards = () => {
+        if(activeElement - 1 >= 0) setActiveElement(activeElement - 1)
+        else setActiveElement(carouselCards.length-1)
+
+        // if(autoCycling) {
+        //     clearAllScheduledIntervals()
+        //     scheduleCycle()
+        // }
+    }
+
 
     return (
         <CarouselWrapper>
-            <CarouselContainer>
-                <GonzoCarouselItem />
+            <CarouselContainer onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
+                {carouselCards[activeElement]}
             </CarouselContainer>
 
             <ControlsContainer>
-                <Image width={30} height={30} src='/icons/left-chevron.svg' />
-                <Image width={30} height={30} src='/icons/right-chevron.svg' />
+                <Image onClick={goForwards} width={30} height={30} src='/icons/left-chevron.svg' alt='back carousel button' />
+                <Image onClick={goBackwards} width={30} height={30} src='/icons/right-chevron.svg' alt='forwards carousel button'/>
             </ControlsContainer>
 
         </CarouselWrapper>
@@ -66,6 +120,16 @@ const DimmerTriggerer = styled.div`
 
     z-index : 7;
 
+`
+
+export const FadeInFadeOutContainer = styled.div`
+
+    animation: fadeIn 1s;
+
+    @keyframes fadeIn{
+        from{opacity : 0}
+        to{opacity : 1}
+    }
 `
 
 const CarouselWrapper = styled.div`

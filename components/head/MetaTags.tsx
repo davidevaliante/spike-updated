@@ -25,8 +25,6 @@ const MetaTags : FunctionComponent<Props> = ({
 }) => {
 
     const { contextCountry } = useContext(LocaleContext)
-    console.log('called')
-    console.log(title, 'title')
 
     return (
         <Head>

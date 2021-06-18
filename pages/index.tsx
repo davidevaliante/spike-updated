@@ -47,11 +47,11 @@ const index : FunctionComponent<Props> = ({
 	const {t} = useContext(LocaleContext)
 	const router = useRouter()
 
-	console.log(
-		onlineSlots,
-		vltSlots,
-		barSlots, 
-		producerSlots)
+	// console.log(
+	// 	onlineSlots,
+	// 	vltSlots,
+	// 	barSlots, 
+	// 	producerSlots)
 
 	return (
 		<Fragment>
@@ -59,6 +59,14 @@ const index : FunctionComponent<Props> = ({
 
 			<Layout>
 				<Carousel />
+
+
+				<VerticalSpacer />
+				<VerticalSpacer />
+				<SlotList listHeader='Selezionate da SPIKE' slots={[...onlineSlots, ...producerSlots, ...vltSlots, ...barSlots]}>
+
+				</SlotList>
+				
 				{/* <MarkdownRenderer content={topArticle}/>
 
 				<SlotList listHeader={t('Best Online Slots')} scrollbarColor='#ebba34'>

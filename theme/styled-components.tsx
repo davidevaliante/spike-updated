@@ -31,6 +31,11 @@ const GlobalStyle = createGlobalStyle`
         background : ${primary};
     }
 
+    p{
+        margin-block-start : 0;
+        margin-block-end: 0 ;
+    }
+
     a{
         text-decoration : none;
     }
@@ -40,11 +45,11 @@ const GlobalStyle = createGlobalStyle`
     }
 
     ::-webkit-scrollbar-track{
-        background : grey;
+        background : ${primaryDark};
     }
 
     ::-webkit-scrollbar-thumb{
-        background : ${appBlue};
+        background : ${accentColor};
     }
 `
 

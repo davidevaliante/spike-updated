@@ -6,7 +6,7 @@ import Header from '../../shared/Text/Header'
 import Paragraph from '../../shared/Text/Paragraph'
 import CarouselDimmer from './CarouselDimmer'
 import Image from 'next/image'
-import { carouselDesktopSize, FadeInFadeOutContainer } from './../Carousel';
+import { carouselDesktopSize, FadeInFadeOutContainer } from '../Carousel';
 import styled from 'styled-components'
 import { laptop, tablet } from '../../../utils/Breakpoints'
 
@@ -14,13 +14,13 @@ interface Props {
     
 }
 
-const gonzoImageUrl = '/pics/gonzo-slot-2-min.jpg'
+const bookOfOzImage = '/pics/book-of-oz.jpg'
 
-const GonzoCarouselItem : FunctionComponent<Props> = ({}) => {
+const BookOfOzCarousel : FunctionComponent<Props> = ({}) => {
     return (
         <FadeInFadeOutContainer>
             <GonzoStyleProvider>
-                <Image width={1400} height={carouselDesktopSize.height} src={gonzoImageUrl}/>
+                <Image width={1400} height={carouselDesktopSize.height} src={bookOfOzImage}/>
                     
                 <OfferContainer className='offer-container'>
                     <Header type={1} style={{fontSize : '2.3rem'}}>Offerta Esclusiva</Header>
@@ -90,4 +90,4 @@ const CTAContainer = styled.div`
     z-index : 3;
 `
 
-export default GonzoCarouselItem
+export default BookOfOzCarousel

@@ -21,7 +21,6 @@ class MyApp extends App {
         return (
             <ContextProvider>
                 <GlobalStyleProvider />
-                <Reset />
                 <LocaleContextProvider>
                     <Component {...pageProps} />
                 </LocaleContextProvider>

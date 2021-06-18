@@ -27,7 +27,7 @@ const GetOfferButton : FunctionComponent<Props> = ({style, icon, color = primary
 
 const ButtonContainer = styled.button`
 
-    padding : .8rem 2rem;    
+    padding : .4rem 2rem;    
     border : 0;
     font-family : ${config.fontName}, sans-serif;
     color : white;
