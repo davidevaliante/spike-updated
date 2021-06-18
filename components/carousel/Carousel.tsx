@@ -6,13 +6,12 @@ import PlayNowButton from '../buttons/PlayNowButton'
 import Header from '../shared/Text/Header'
 import Paragraph from './../shared/Text/Paragraph';
 import GetOfferButton from '../buttons/GetOfferButton'
-import { appYellow, appGold } from './../../theme/styled-components';
+import { appYellow, appGold } from './../../theme/styled-components'
 import { tablet } from '../../utils/Breakpoints'
-import { laptop } from './../../utils/Breakpoints';
+import { laptop } from './../../utils/Breakpoints'
 import GonzoCarouselItem from './coursel-items/GonzoCarouselItem'
 import DeadOrAliveCarousel from './coursel-items/DeadOrAliveCarousel'
 import { useEffect } from 'react';
-import useInterval from './../../hooks/useInterval';
 import BookOfOzCarousel from './coursel-items/BookOfOzCarousel'
 
 
